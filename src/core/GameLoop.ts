@@ -5,16 +5,27 @@ import SceneManager from "./SceneManager";
 import Pointer from "./Pointer";
 import Renderer from "./Renderer";
 import ResourceManager from "./ResourceManager";
+import InputHandler from "./InputHandler";
+import SoundManager from "./SoundManager";
 class GameLoop {
     private lastTime : number;
     
     constructor(){
-        ResourceManager.init();
+        this.setup();
+    }
+
+    setup = async () => {
+        Settings.add("imgsrc", "../../assets/images/");
+        Settings.add("soundsrc", "../../assets/sounds/");
+        Settings.add("FPS", 8);
+        Settings.add("gravity", 9.8);
+        await ResourceManager.init();
         Renderer.init();
+        InputHandler.init(Renderer.getCanvas());
         SceneManager.init();
         this.lastTime = Date.now();
         Pointer.init();
-        Settings.add("FPS", 60);
+        await SoundManager.init();
     }
 
     run = () =>{

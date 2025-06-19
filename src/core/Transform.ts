@@ -1,5 +1,6 @@
 // Transform.ts
-class Transform {
+import Component from "./Component";
+class Transform extends Component {
     private x : number;
     private y : number;
     private width : number;
@@ -9,6 +10,7 @@ class Transform {
     private rotation : number;
 
     constructor(x: number = 0, y: number = 0, width: number = 100, height: number = 100, scaleX: number = 1, scaleY: number = 1, rotation: number = 0) {
+        super();
         this.x = x;
         this.y = y;
         this.width = width;

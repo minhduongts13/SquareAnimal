@@ -1,7 +1,7 @@
 // InputHandler.ts
 import Pointer from "./Pointer";
 class InputHandler {
-    private static keys: Record<string, boolean>;
+    private static keys: Record<string, boolean> = {};
     private static mouseButtons: Record<number, boolean> = {};
 
     public static init(canvas: HTMLCanvasElement) {

@@ -3,21 +3,32 @@ import Component from "./Component";
 import Transform from "./Transform";
 import SpriteRenderer from "./SpriteRenderer";
 import Pointer from "./Pointer";
+import InputHandler from "./InputHandler";
 
 class GameObject {
-    private components: Component[];
-    private children: GameObject[];
-    private spriteRenderer: SpriteRenderer;
-    private transform: Transform;
+    protected components: Component[];
+    protected children: GameObject[];
+    protected spriteRenderer: SpriteRenderer;
+    protected transform: Transform;
+    protected layer: number = 0;
 
-    constructor(){
+    constructor(transform : Transform, spriteRenderer : SpriteRenderer = new SpriteRenderer("../../assets/images/phaser-logo.png", 222, 190, 1), layer: number = 0 ){
         this.components = [];
         this.children = [];
-        this.spriteRenderer = new SpriteRenderer("../../assets/images/phaser-logo.png", 222, 190, 1);
-        this.transform = new Transform(Pointer.position.x, Pointer.position.y, 100, 100);
+        this.spriteRenderer = spriteRenderer;
+        this.transform = transform;
+    }
+
+    addComponent(component: Component){
+        this.components.push(component);
+    }
+
+    addChild(child: GameObject){
+        this.children.push(child);
     }
 
     update(){
+        
         for (const component of this.components){
             component.update();
         }
@@ -25,11 +36,20 @@ class GameObject {
             child.update();
         }
         this.spriteRenderer.update();
-        this.transform.update(Pointer.position.x, Pointer.position.y);
+        this.transform.update();
+
     }
 
     render(){
         this.spriteRenderer.render(this.transform.position.x, this.transform.position.y);
+    }
+
+    get getTransform(){
+        return this.transform;
+    }
+
+    getComponent<T extends Component>(ctor: Function): T | undefined {
+        return this.components.find(c => c instanceof ctor) as T | undefined;
     }
 }
 export default GameObject;

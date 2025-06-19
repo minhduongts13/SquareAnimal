@@ -1,5 +1,6 @@
 // SceneManager.ts
 import Scene from "./Scene";
+import Camera from "./Camera";
 class SceneManager {
     private static scenes : Map<string, Scene>;
     private static currentScene : Scene;

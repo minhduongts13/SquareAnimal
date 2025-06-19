@@ -1,9 +1,11 @@
 // Collider.ts
 import Component from "./Component";
-class Collider extends Component {
-    constructor(){
+import Transform from "./Transform";
+abstract class Collider extends Component {
+    public transform : Transform;
+    constructor(transform: Transform){
         super();
-        this.name = "Collider";
+        this.transform = transform;
     }
 
     checkCollision(collider : Collider) : boolean {
@@ -13,5 +15,7 @@ class Collider extends Component {
     update(){
         
     }
+
+    onCollision?(other: Collider): void;
 }
 export default Collider;

@@ -1,4 +1,5 @@
 // ResourceManager.ts
+import { Settings } from "./Settings";
 class ResourceManager {
     private static image : Map<string, HTMLImageElement>;
     private static audio : Map<string, HTMLAudioElement>;
@@ -7,8 +8,9 @@ class ResourceManager {
         this.image = new Map<string, HTMLImageElement>();
         this.audio = new Map<string, HTMLAudioElement>();
         try {
-            const img = await this.loadImage("../../assets/images/phaser-logo.png");
-            console.log("Image loaded:", ResourceManager.getImage("../../assets/images/phaser-logo.png"));
+            await this.loadImage(Settings.get("imgsrc") + "phaser-logo.png");
+            await this.loadImage(Settings.get("imgsrc") + "Attack_KG_3.png");
+            await this.loadImage(Settings.get("imgsrc") + "PisoA_strip18.png");
         } catch (e) {
             console.error("Could not load image:", e);
         }
