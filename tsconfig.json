@@ -17,7 +17,7 @@
     "strictPropertyInitialization": false,
 
     "moduleResolution": "node",
-    "lib": ["dom", "esnext"]
+    "lib": ["dom", "esnext"],
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"],
@@ -25,6 +25,7 @@
     "./node_modules/@types",
     "./phaser/types",
     "./src/types",
-    "./src/**/types"
+    "./src/**/types",
+    "./src/game/types"
 ],
 }
