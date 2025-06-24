@@ -6,13 +6,17 @@ class GameObject implements Engine.IGameObject {
     protected children: Engine.IGameObject[];
     protected renderer: Engine.IRenderer;
     protected transform: Transform;
+    protected tag: string;
 
     constructor(
         transform: Transform,
+        renderer?: Engine.IRenderer
     ) {
         this.components = [];
         this.children = [];
         this.transform = transform;
+        if (renderer) 
+            this.renderer = renderer;
     }
 
     addComponent(component: Engine.IComponent){
@@ -37,11 +41,22 @@ class GameObject implements Engine.IGameObject {
     }
 
     render(){
+        for (const child of this.children){
+            child.render();
+        }
         this.renderer.render(this.transform.position.x, this.transform.position.y);
     }
 
     public get getTransform(){
         return this.transform;
+    }
+
+    public get getChildren(){
+        return this.children
+    }
+
+    public getAllComponents(){
+        return this.components;
     }
 
     public getComponent<T extends Engine.IComponent>(ctor: Function): T | undefined {

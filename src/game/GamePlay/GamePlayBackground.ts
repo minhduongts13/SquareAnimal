@@ -24,7 +24,7 @@ class GamePlayBackground extends GameObject{
             new ParallaxLayer(IMAGES.GAME_BG_RIVERFRONT.KEY, IMAGES.GAME_BG_RIVERFRONT.PATH, 120, Settings.get("gameHeight")),
             new ParallaxLayer(IMAGES.GAME_BG_RIVERSKYREDLEX.KEY, IMAGES.GAME_BG_RIVERSKYREDLEX.PATH, 30, Settings.get("gameHeight")),
             new ParallaxLayer(IMAGES.GAME_BG_VILLAGE.KEY, IMAGES.GAME_BG_VILLAGE.PATH, 140, Settings.get("gameHeight")),
-            // new ParallaxLayer(IMAGES.GAME_GROUND.KEY, IMAGES.GAME_GROUND.PATH, 140, Settings.get("gameHeight")),
+            // new ParallaxLayer(IMAGES.GAME_GROUND.KEY, IMAGES.GAME_GROUND.PATH, 140, 192),
         ];
     }
 

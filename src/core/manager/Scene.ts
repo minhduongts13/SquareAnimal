@@ -7,15 +7,13 @@ class Scene {
 
     constructor(){
         this.gameObjects = [];
-        
-        PhysicsHandler.init();
-        PhysicsHandler.changeScene(this.gameObjects);
-
         this.setup();
         window.addEventListener("resize", () => {Renderer.setScreenSize();});
     }
-
+    
     setup = async () =>{
+        PhysicsHandler.init();
+        PhysicsHandler.changeScene(this.gameObjects);
         Renderer.setScreenSize();
     }
 
@@ -31,6 +29,14 @@ class Scene {
     }
     end(){
 
+    }
+
+    reset() {
+        this.gameObjects = [];
+        PhysicsHandler.init();
+        
+        this.create();
+        PhysicsHandler.changeScene(this.gameObjects);
     }
 
     async preload(): Promise<void> {

@@ -40,7 +40,7 @@ class RigidBody implements Engine.IComponent{
         // this.velocity.y *= Math.max(0, 1 - this.damping * Settings.get("deltaTime"));
 
         this.transform.update(this.transform.position.x + this.velocity.x * Settings.get("deltaTime"), 
-        this.transform.position.y + this.velocity.y * Settings.get("deltaTime"));
+        Math.min(Settings.get("gameHeight") - 224, this.transform.position.y + this.velocity.y * Settings.get("deltaTime")));
         this.force.x = 0;
         this.force.y = 0;
     }

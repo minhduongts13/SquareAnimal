@@ -5,7 +5,6 @@ import ResourceManager from "../../core/manager/ResourceManager";
 import Scene from "../../core/manager/Scene";
 import SceneManager from "../../core/manager/SceneManager";
 import { IMAGES } from "../constant/images";
-import GameOverScene from "../GameOver/GameOverScene";
 import CatCharacter from "./CatCharacter";
 import MenuBackground from "./MenuBackground";
 import MenuLogo from "./MenuLogo";
@@ -16,7 +15,7 @@ class MenuScene extends Scene {
         super();
     }
 
-    public create():void{
+    public create(): void{
         this.gameObjects.push(new MenuBackground());
         this.gameObjects.push(new Button(150, 200, 150, 50, "Play",
             () => {
@@ -33,7 +32,6 @@ class MenuScene extends Scene {
         await ResourceManager.loadImage(IMAGES.CAT_CHAR_MENU.KEY, IMAGES.CAT_CHAR_MENU.PATH);
         await ResourceManager.loadImage(IMAGES.MENU_BG.KEY, IMAGES.MENU_BG.PATH);
         await ResourceManager.loadImage(IMAGES.MENU_LOGO.KEY, IMAGES.MENU_LOGO.PATH);
-        this.create();
     }
 
 }

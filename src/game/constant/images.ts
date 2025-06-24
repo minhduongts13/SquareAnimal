@@ -1,6 +1,10 @@
 // images.ts
 
 export const IMAGES = {
+    BLANK: {
+        KEY: "Blank",
+        PATH: "../../../assets/images/blank.png"
+    },
     GAME_OVER_LOGO: {
         KEY: "GameOverLogo",
         PATH: "../../../assets/images/gameOverLogo.png"
@@ -19,7 +23,7 @@ export const IMAGES = {
     },
     CAT_CHAR: {
         KEY: "Cat_Char",
-        PATH: "../../../assets/images/character.png"
+        PATH: "../../../assets/images/player.png"
     },
     CAT_CHAR_MENU: {
         KEY: "Cat_Char_Menu",
@@ -67,8 +71,36 @@ export const IMAGES = {
     },
     GAME_GROUND: {
         KEY: "Game_Ground",
-        PATH: "../../../assets/images/ruralArea/ground.png"
+        PATH: "../../../assets/images/ruralArea/ground.png",
+    
     },
-
+    OBSTACLE_1: {
+        KEY: "Obstacle_1",
+        PATH: "../../../assets/images/obstacle/ob1.png",
+        WIDTH: 96,
+        HEIGHT: 448
+    },
+    OBSTACLE_2: {
+        KEY: "Obstacle_2",
+        PATH: "../../../assets/images/obstacle/ob2.png",
+        WIDTH: 96,
+        HEIGHT: 288
+    },
+    OBSTACLE_3: {
+        KEY: "Obstacle_3",
+        PATH: "../../../assets/images/obstacle/ob3.png",
+        WIDTH: 96,
+        HEIGHT: 448
+    },
+    OBSTACLE_4: {
+        KEY: "Obstacle_4",
+        PATH: "../../../assets/images/obstacle/ob4.png",
+        WIDTH: 32,
+        HEIGHT: 448
+    },
+    SQUARE: {
+        KEY: "SQUARE",
+        PATH: "../../../assets/images/square.png"
+    }
 }
 

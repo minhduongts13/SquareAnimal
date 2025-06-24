@@ -20,7 +20,7 @@ class GameOverScene extends Scene {
         this.gameObjects.push(new GameOverLogo())
         this.gameObjects.push(new Button(150, 200, 150, 50, "Restart",
             () => {
-                SceneManager.switchScene("menu");
+                SceneManager.switchScene("gameplay");
             },
             "#A4DD00",
             "#B6F500"
@@ -38,7 +38,6 @@ class GameOverScene extends Scene {
     public async preload(): Promise<void> {
         await ResourceManager.loadImage(IMAGES.GAME_OVER_BG.KEY, IMAGES.GAME_OVER_BG.PATH)
         await ResourceManager.loadImage(IMAGES.GAME_OVER_LOGO.KEY, IMAGES.GAME_OVER_LOGO.PATH)
-        this.create();
     }
 
 }

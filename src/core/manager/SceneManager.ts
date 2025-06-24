@@ -16,7 +16,6 @@ class SceneManager implements Engine.ISceneManager {
         SceneManager.scenes.set("gameover", new GameOverScene());
         
         SceneManager.currentScene = "menu";
-        
     }
 
     static switchScene = (nextScene : string): void => {
@@ -24,8 +23,8 @@ class SceneManager implements Engine.ISceneManager {
             SceneManager.scenes.get(SceneManager.currentScene)!.end();
         }
         SceneManager.currentScene = nextScene;
-        SceneManager.scenes.get(SceneManager.currentScene)!.setup();
-        SceneManager.scenes.get(SceneManager.currentScene)!.run();
+        SceneManager.scenes.get(SceneManager.currentScene)!.reset();
+        // SceneManager.scenes.get(SceneManager.currentScene)!.run();
 
     }
 
@@ -33,12 +32,12 @@ class SceneManager implements Engine.ISceneManager {
         for (let scene of this.scenes){
             await scene[1].preload();
         }
+        SceneManager.scenes.get(SceneManager.currentScene)!.reset();
     }
     
     static update = (): void => {
-        if (SceneManager.currentScene) {
-            SceneManager.scenes.get(SceneManager.currentScene)!.run();
-        }
+        SceneManager.scenes.get(SceneManager.currentScene)!.run();
+        console.log(SceneManager.scenes.get("gameplay"));
     }
 }
 export default SceneManager;
