@@ -5,17 +5,19 @@ import MenuScene from "../../game/Menu/MenuScene";
 import GameOverScene from "../../game/GameOver/GameOverScene";
 import GamePlayScene from "../../game/GamePlay/GamePlayScene";
 import PhysicsHandler from "./PhysicsHandler";
+import LoadingScene from "../../game/Loading/LoadingScene";
 class SceneManager implements Engine.ISceneManager {
     private static scenes : Map<string, Scene>;
     private static currentScene : string;
 
     static init(){
         SceneManager.scenes = new Map<string, Scene>();
+        SceneManager.scenes.set("loading", new LoadingScene());
         SceneManager.scenes.set("menu", new MenuScene());
         SceneManager.scenes.set("gameplay", new GamePlayScene());
         SceneManager.scenes.set("gameover", new GameOverScene());
         
-        SceneManager.currentScene = "menu";
+        SceneManager.currentScene = "loading";
     }
 
     static switchScene = (nextScene : string): void => {
@@ -24,7 +26,6 @@ class SceneManager implements Engine.ISceneManager {
         }
         SceneManager.currentScene = nextScene;
         SceneManager.scenes.get(SceneManager.currentScene)!.reset();
-        // SceneManager.scenes.get(SceneManager.currentScene)!.run();
 
     }
 
@@ -37,7 +38,6 @@ class SceneManager implements Engine.ISceneManager {
     
     static update = (): void => {
         SceneManager.scenes.get(SceneManager.currentScene)!.run();
-        console.log(SceneManager.scenes.get("gameplay"));
     }
 }
 export default SceneManager;

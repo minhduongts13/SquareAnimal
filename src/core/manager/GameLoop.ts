@@ -27,8 +27,8 @@ class GameLoop {
         Settings.add("soundsrc", "../../assets/sounds/");
         Settings.add("FPS", 8);
         Settings.add("gravity", 98);
-        Settings.add("gameWidth", 448);
-        Settings.add("gameHeight", 640);
+        Settings.add("gameWidth", 448); // 448
+        Settings.add("gameHeight", 640); // 640
 
         await ResourceManager.init();
         Renderer.init();

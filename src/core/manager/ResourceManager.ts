@@ -8,9 +8,7 @@ class ResourceManager {
         this.image = new Map<string, HTMLImageElement>();
         this.audio = new Map<string, HTMLAudioElement>();
         try {
-            await this.loadImage("phaser-logo", Settings.get("imgsrc") + "phaser-logo.png");
-            await this.loadImage("Attack_KG", Settings.get("imgsrc") + "Attack_KG_3.png");
-            await this.loadImage("PisoA", Settings.get("imgsrc") + "PisoA_strip18.png");
+        
         } catch (e) {
             console.error("Could not load image:", e);
         }

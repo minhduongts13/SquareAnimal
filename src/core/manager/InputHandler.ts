@@ -14,6 +14,37 @@ class InputHandler {
         canvas.addEventListener("mousedown", InputHandler.onMouseDown);
         canvas.addEventListener("mouseup",   InputHandler.onMouseUp);
 
+        // Touch
+        canvas.addEventListener("touchstart", e => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            InputHandler.mouseButtons[0] = true;
+
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width  / rect.width;
+            const scaleY = canvas.height / rect.height;
+            const x = (touch.clientX - rect.left) * scaleX;
+            const y = (touch.clientY - rect.top)  * scaleY;
+            Pointer.position = { x, y };
+        });
+
+        canvas.addEventListener("touchmove", e => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width  / rect.width;
+            const scaleY = canvas.height / rect.height;
+            const x = (touch.clientX - rect.left) * scaleX;
+            const y = (touch.clientY - rect.top)  * scaleY;
+            Pointer.position = { x, y };
+        });
+
+        canvas.addEventListener("touchend", e => {
+            e.preventDefault();
+            InputHandler.mouseButtons[0] = false;
+        });
+
+
     }
 
     private static onKeyDown(e: KeyboardEvent) {
@@ -25,11 +56,12 @@ class InputHandler {
     }
 
     private static onMouseMove(e: MouseEvent) {
-        const rect = (e.target as HTMLElement).getBoundingClientRect();
+        // const rect = (e.target as HTMLElement).getBoundingClientRect();
         Pointer.mouseMove(e);
     }
 
     private static onMouseDown(e: MouseEvent) {
+        console.log(e)
         InputHandler.mouseButtons[e.button] = true;
     }
 

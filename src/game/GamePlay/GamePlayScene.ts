@@ -1,5 +1,4 @@
 // GamePlayScene.ts
-import Button from "../../core/gameobject/Button";
 import PhysicsHandler from "../../core/manager/PhysicsHandler";
 import ResourceManager from "../../core/manager/ResourceManager";
 import Scene from "../../core/manager/Scene";
@@ -60,7 +59,7 @@ class GamePlayScene extends Scene {
         if (this.timer >= this.spawnInterval) {
             this.timer = 0;
             let index = Math.floor(Math.random() * 4);  
-            const obstacle = ObstaclePoolManager.get(3);
+            const obstacle = ObstaclePoolManager.get(index);
             obstacle.getTransform.update(this.spawnPoint.x, this.spawnPoint.y);
         }
         for (let gameObject of this.gameObjects){

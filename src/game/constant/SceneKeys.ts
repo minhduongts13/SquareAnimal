@@ -10,6 +10,7 @@ export const SceneKeys = {
         TAG: "PLAYER"
     },
     BOX: {
+        HEAD: "HEAD",
         TAG: "BOX"
     }
 }

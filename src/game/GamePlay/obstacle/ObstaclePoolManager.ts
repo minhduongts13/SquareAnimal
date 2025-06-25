@@ -8,6 +8,7 @@ class ObstaclePoolManager {
     private static pool: Obstacle[] = [];
 
     static create(){
+        this.pool = [];
         let ob1 = new Obstacle(IMAGES.OBSTACLE_1.KEY, IMAGES.OBSTACLE_1.WIDTH, IMAGES.OBSTACLE_1.HEIGHT);
         ob1.addComponent(new BoxCollider(ob1.getTransform, SceneKeys.OBSTACLE.TAG,  0, 0, 96, 6*32));
         ob1.addComponent(new BoxCollider(ob1.getTransform, SceneKeys.OBSTACLE.TAG, 0, 9*32, 96, 5*32));

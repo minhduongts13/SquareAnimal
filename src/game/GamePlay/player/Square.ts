@@ -15,9 +15,13 @@ class Square extends GameObject {
             width: 32,
             height: 32,
         });
-        this.addComponent(new BoxCollider(this.transform, SceneKeys.BOX.TAG));
         let rigidBody = new RigidBody(this.transform, {x : 0, y : 0}, 100, true);
         this.addComponent(rigidBody);
+        this.addComponent(new BoxCollider(this.transform, SceneKeys.BOX.TAG));
+        let collider2 = new BoxCollider(this.transform, SceneKeys.BOX.HEAD, 32, 2, 1, 28);
+        this.addComponent(collider2);
     }
+
+    
 }
 export default Square;

@@ -25,7 +25,7 @@ class Controller implements Engine.IComponent {
         if ((space || mouse) && !this.jumped) {
             this.jumped = true;
             const { x, y } = this.player.getTransform.position;
-            this.player.getTransform.update(x, y - 32);
+            // this.player.getTransform.update(x, y - 32);
             this.player.placePlatform();
         }
 

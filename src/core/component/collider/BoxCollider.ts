@@ -74,12 +74,12 @@ class BoxCollider extends Collider {
         const w = this.xmax - this.xmin;
         const h = this.ymax - this.ymin;
 
-        // Dùng strokeRect để vẽ viền
-        Renderer.getContext().save();
-        Renderer.getContext().strokeStyle = "red";
-        Renderer.getContext().lineWidth   = 1;
-        Renderer.getContext().strokeRect(x, y, w, h);
-        Renderer.getContext().restore();
+    
+        // Renderer.getContext().save();
+        // Renderer.getContext().strokeStyle = "red";
+        // Renderer.getContext().lineWidth   = 1;
+        // Renderer.getContext().strokeRect(x, y, w, h);
+        // Renderer.getContext().restore();
     }
 }
 export default BoxCollider;

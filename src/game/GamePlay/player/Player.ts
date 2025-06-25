@@ -4,6 +4,7 @@ import Controller from "../../../core/component/Controller";
 import RigidBody from "../../../core/component/RigidBody";
 import Transform from "../../../core/component/Transform";
 import GameObject from "../../../core/gameobject/GameObject";
+import SceneManager from "../../../core/manager/SceneManager";
 import SpriteRenderer from "../../../core/renderer/SpriteRenderer";
 import { IMAGES } from "../../constant/images";
 import { SceneKeys } from "../../constant/SceneKeys";
@@ -22,7 +23,7 @@ class Player extends GameObject {
         );
         let controller = new Controller(this);
         let collider = new BoxCollider(this.transform, SceneKeys.PLAYER.TAG);
-        let collider2 = new BoxCollider(this.transform, SceneKeys.PLAYER.HEAD, 32, 2, 1, 28);
+        let collider2 = new BoxCollider(this.transform, SceneKeys.PLAYER.HEAD, 32, 4, 1, 24);
         let rigidBody = new RigidBody(this.transform, {x : 0, y : 0}, 100, true);
         this.addComponent(collider);
         this.addComponent(collider2);
@@ -34,6 +35,12 @@ class Player extends GameObject {
         const x = this.transform.position.x;
         const y = this.transform.position.y + this.transform.size.height;
         this.children.push(new Square(x, y));
+        if (this.transform.position.y < 32) SceneManager.switchScene("gameover")
+    }
+
+    public reset(): void {
+        this.transform.position.x = 32;
+        this.transform.position.y = 100;
     }
 }
 export default Player;

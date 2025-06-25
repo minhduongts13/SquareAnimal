@@ -62,5 +62,9 @@ class GameObject implements Engine.IGameObject {
     public getComponent<T extends Engine.IComponent>(ctor: Function): T | undefined {
         return this.components.find(c => c instanceof ctor) as T | undefined;
     }
+
+    public reset(){
+        
+    }
 }
 export default GameObject;
