@@ -20,8 +20,8 @@ class Obstacle extends GameObject {
     }
 
     reset() {
-        this.transform.position.x = SceneKeys.OBSTACLE.INITIAL_POS.x;
-        this.transform.position.y = SceneKeys.OBSTACLE.INITIAL_POS.y;
+        this.transform.update(SceneKeys.OBSTACLE.INITIAL_POS.x, SceneKeys.OBSTACLE.INITIAL_POS.y);
+        this.active = false;
     }
 
     update() {

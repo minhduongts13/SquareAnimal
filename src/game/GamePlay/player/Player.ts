@@ -9,10 +9,11 @@ import SpriteRenderer from "../../../core/renderer/SpriteRenderer";
 import { IMAGES } from "../../constant/images";
 import { SceneKeys } from "../../constant/SceneKeys";
 import Square from "./Square";
+import SquarePoolManager from "./SquarePoolManager";
 
 class Player extends GameObject {
     constructor(){
-        super(new Transform(32, 100, 32, 32));
+        super(new Transform(SceneKeys.PLAYER.INITIAL_POS.x, SceneKeys.PLAYER.INITIAL_POS.y, 32, 32));
         this.renderer = new SpriteRenderer(
             {
                 key: IMAGES.CAT_CHAR.KEY,
@@ -34,13 +35,27 @@ class Player extends GameObject {
     public placePlatform(): void {
         const x = this.transform.position.x;
         const y = this.transform.position.y + this.transform.size.height;
-        this.children.push(new Square(x, y));
+        let square = SquarePoolManager.get();
+        square.work(x, y);
+        this.children.push(square);
         if (this.transform.position.y < 32) SceneManager.switchScene("gameover")
     }
 
+    public releaseSquare(id : number): void{
+        for (let i = 0; i < this.children.length; i++){
+            if ((this.children[i] as Square).getId() == id){
+                SquarePoolManager.release(this.children[i] as Square);
+                this.children.splice(i, 1);
+            }
+        }
+    }
+
     public reset(): void {
-        this.transform.position.x = 32;
-        this.transform.position.y = 100;
+        this.transform.update(SceneKeys.PLAYER.INITIAL_POS.x, SceneKeys.PLAYER.INITIAL_POS.y);
+        for (let square of this.children){
+            SquarePoolManager.release(square as Square);
+        }
+        this.children = [];
     }
 }
 export default Player;

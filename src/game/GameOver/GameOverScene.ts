@@ -5,6 +5,7 @@ import ResourceManager from "../../core/manager/ResourceManager";
 import Scene from "../../core/manager/Scene";
 import SceneManager from "../../core/manager/SceneManager";
 import { IMAGES } from "../constant/images";
+import { SOUNDS } from "../constant/sounds";
 import GameOverBackground from "./GameOverBackground";
 import GameOverLogo from "./GameOverLogo";
 
@@ -19,7 +20,7 @@ class GameOverScene extends Scene {
         this.gameObjects.push(new GameOverBackground());
         this.gameObjects.push(new GameOverLogo())
         this.gameObjects.push(new Button(150, 200, 150, 50, "Restart",
-            () => {
+            async () => {
                 SceneManager.switchScene("gameplay");
             },
             "#A4DD00",
@@ -27,8 +28,8 @@ class GameOverScene extends Scene {
         ));
 
         this.gameObjects.push(new Button(150, 270, 150, 50, "Back to Menu",
-            () => {
-                SceneManager.switchScene("menu");
+            async () => {
+                await SceneManager.switchScene("menu");
             },
             "yellow",
             "#FFFA8D"
@@ -36,8 +37,13 @@ class GameOverScene extends Scene {
     }
 
     public async preload(): Promise<void> {
-        await ResourceManager.loadImage(IMAGES.GAME_OVER_BG.KEY, IMAGES.GAME_OVER_BG.PATH)
-        await ResourceManager.loadImage(IMAGES.GAME_OVER_LOGO.KEY, IMAGES.GAME_OVER_LOGO.PATH)
+        if (this.loaded) return;
+        await ResourceManager.loadImage(IMAGES.GAME_OVER_BG.KEY, IMAGES.GAME_OVER_BG.PATH);
+        await ResourceManager.loadImage(IMAGES.GAME_OVER_LOGO.KEY, IMAGES.GAME_OVER_LOGO.PATH);
+        await ResourceManager.loadAudio(SOUNDS.GAMEOVER.SOUND.KEY, SOUNDS.GAMEOVER.SOUND.PATH);
+
+        this.create();
+        this.loaded = true;
     }
 
 }

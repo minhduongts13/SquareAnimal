@@ -104,7 +104,15 @@ export const IMAGES = {
     },
     LOADING_BG: {
         KEY: "Loading_BG",
-        PATH: "https://minhduongts13.github.io/SquareAnimal/assets/images/loading.png"
+        PATH: "../assets/images/loading-background.jpg"
+    },
+    LOADING_ICON: {
+        KEY: "Loading_Icon",
+        PATH: "../assets/images/loading.png"
+    },
+    LOADING_TEXT: {
+        KEY: "Loading_Text",
+        PATH: "../assets/images/loading-text.png"
     },
 }
 

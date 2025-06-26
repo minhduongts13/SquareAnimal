@@ -9,12 +9,11 @@ import SoundManager from "./SoundManager";
 class GameLoop {
     private lastTime : number;
     private paused = false;
-    // scene: IScenemanager
-    // renderer:
-    // InputHandler
     
     constructor(){
-        this.setup();
+        this.setup().then(() => {
+            this.run();
+        });
         window.addEventListener("blur",  () => { this.paused = true; });
         window.addEventListener("focus", () => {
             this.paused = false;
@@ -33,13 +32,11 @@ class GameLoop {
         await ResourceManager.init();
         Renderer.init();
         InputHandler.init(Renderer.getCanvas());
-        SceneManager.init();
-        await SceneManager.preload();
+        await SceneManager.init();
         this.lastTime = Date.now();
         Pointer.init();
         await SoundManager.init();
-
-        this.run();
+        SceneManager.switchScene("menu");
     }
 
     run = () =>{

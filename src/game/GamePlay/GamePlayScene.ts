@@ -4,10 +4,12 @@ import ResourceManager from "../../core/manager/ResourceManager";
 import Scene from "../../core/manager/Scene";
 import Settings from "../../core/manager/Settings";
 import { IMAGES } from "../constant/images";
+import { SOUNDS } from "../constant/sounds";
 import GamePlayBackground from "./GamePlayBackground";
 import Ground from "./Ground";
 import ObstaclePoolManager from "./obstacle/ObstaclePoolManager";
 import Player from "./player/Player";
+import SquarePoolManager from "./player/SquarePoolManager";
 
 class GamePlayScene extends Scene {
     private timer: number = 0;
@@ -21,6 +23,7 @@ class GamePlayScene extends Scene {
 
 
     public async preload(): Promise<void> {
+        if (this.loaded) return;
         await ResourceManager.loadImage(IMAGES.CAT_CHAR.KEY, IMAGES.CAT_CHAR.PATH);
         await ResourceManager.loadImage(IMAGES.MENU_BG.KEY, IMAGES.MENU_BG.PATH);
         await ResourceManager.loadImage(IMAGES.MENU_LOGO.KEY, IMAGES.MENU_LOGO.PATH);
@@ -40,6 +43,11 @@ class GamePlayScene extends Scene {
         await ResourceManager.loadImage(IMAGES.OBSTACLE_3.KEY, IMAGES.OBSTACLE_3.PATH);
         await ResourceManager.loadImage(IMAGES.OBSTACLE_4.KEY, IMAGES.OBSTACLE_4.PATH);
         await ResourceManager.loadImage(IMAGES.SQUARE.KEY, IMAGES.SQUARE.PATH);
+        await ResourceManager.loadAudio(SOUNDS.GAMEPLAY.MUSIC.KEY, SOUNDS.GAMEPLAY.MUSIC.PATH);
+        await ResourceManager.loadAudio(SOUNDS.GAMEPLAY.BOX.KEY, SOUNDS.GAMEPLAY.BOX.PATH);
+
+        this.loaded = true;
+        this.create();
     }
 
     create(){
@@ -47,11 +55,11 @@ class GamePlayScene extends Scene {
         this.gameObjects.push(new GamePlayBackground());
         this.gameObjects.push(new Ground());
         this.gameObjects.push(new Player());
+        SquarePoolManager.create();
         ObstaclePoolManager.create();
         ObstaclePoolManager.getAll().forEach(element => {
             this.gameObjects.push(element);
         });
-        PhysicsHandler.changeScene(this.gameObjects);
     }
 
     run(){
@@ -66,9 +74,12 @@ class GamePlayScene extends Scene {
             gameObject.update();
             gameObject.render();
         }
-        PhysicsHandler.update();
+        this.physicsHandler.update(this.gameObjects);
     }
 
-    
+    reset(): void {
+        super.reset();
+        this.timer = 0;
+    }
 }
 export default GamePlayScene;

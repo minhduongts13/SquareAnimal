@@ -7,10 +7,12 @@ export const SceneKeys = {
     },
     PLAYER: {
         HEAD: "HEAD",
-        TAG: "PLAYER"
+        TAG: "PLAYER",
+        INITIAL_POS: {x : 32, y : 100},
     },
     BOX: {
         HEAD: "HEAD",
-        TAG: "BOX"
+        TAG: "BOX",
+        INITIAL_POS: {x : 0, y : 800},
     }
 }

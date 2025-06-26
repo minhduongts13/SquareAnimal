@@ -61,7 +61,6 @@ class InputHandler {
     }
 
     private static onMouseDown(e: MouseEvent) {
-        console.log(e)
         InputHandler.mouseButtons[e.button] = true;
     }
 

@@ -7,19 +7,18 @@ class SoundManager {
         SoundManager.playingAudios = new Map();
     }
     
-    static async play(path : string, volume: number = 1.0){
-        const audio = await ResourceManager.getAudio(path);
-        audio.src = path;
+    static async play(key : string, volume: number = 1.0){
+        const audio = await ResourceManager.getAudio(key);
+        audio.src = key;
         audio.loop = false;
         audio.volume = volume;
         audio.currentTime = 0;
         audio.play().catch(console.error);
-        SoundManager.playingAudios.set(path, audio);
-        console.log(audio);
+        SoundManager.playingAudios.set(key, audio);
     }
 
-    static async stop(path: string){
-        const audio = SoundManager.playingAudios.get(path);
+    static async stop(key: string){
+        const audio = SoundManager.playingAudios.get(key);
         if (!audio) return;
         audio.pause();
         audio.currentTime = 0;
@@ -29,13 +28,13 @@ class SoundManager {
 
     }
 
-    static async playOnLoop(path: string, volume: number = 1.0){
-        const audio = await ResourceManager.getAudio(path);
+    static async playOnLoop(key: string, volume: number = 1.0){
+        const audio = await ResourceManager.getAudio(key);
         audio.loop = true;
         audio.volume = volume;
         audio.currentTime = 0;
         audio.play().catch(console.error);
-        SoundManager.playingAudios.set(path, audio);
+        SoundManager.playingAudios.set(key, audio);
 
     }
 }
