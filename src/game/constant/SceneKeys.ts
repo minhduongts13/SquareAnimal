@@ -3,7 +3,8 @@ import Player from "../GamePlay/player/Player";
 export const SceneKeys = {
     OBSTACLE: {
         INITIAL_POS : { x : 0, y : 700},
-        TAG: "OBSTACLE"
+        TAG: "OBSTACLE",
+        SPIKE_TAG: "SPIKE"
     },
     PLAYER: {
         HEAD: "HEAD",
@@ -14,5 +15,6 @@ export const SceneKeys = {
         HEAD: "HEAD",
         TAG: "BOX",
         INITIAL_POS: {x : 0, y : 800},
-    }
+    },
+    HIGHSCORE_KEY: "highscore"
 }

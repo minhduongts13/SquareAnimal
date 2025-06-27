@@ -23,6 +23,7 @@ class GameLoop {
 
     setup = async () => {
         Settings.add("imgsrc", "../../assets/images/");
+        Settings.add("score", 0);
         Settings.add("soundsrc", "../../assets/sounds/");
         Settings.add("FPS", 8);
         Settings.add("gravity", 98);
@@ -31,10 +32,10 @@ class GameLoop {
 
         await ResourceManager.init();
         Renderer.init();
+        Pointer.init();
         InputHandler.init(Renderer.getCanvas());
         await SceneManager.init();
         this.lastTime = Date.now();
-        Pointer.init();
         await SoundManager.init();
         SceneManager.switchScene("menu");
     }

@@ -2,6 +2,7 @@
 import Renderer from "../renderer/Renderer";
 import GameObject from "../gameobject/GameObject";
 import PhysicsHandler from "./PhysicsHandler";
+import SoundManager from "./SoundManager";
 class Scene {
     protected gameObjects: GameObject[];
     protected loaded: boolean;
@@ -39,6 +40,7 @@ class Scene {
             go.reset();
         }
         this.physicsHandler.init();
+        SoundManager.stopAll();
     }
 
     async preload(): Promise<void> {

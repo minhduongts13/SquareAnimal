@@ -25,8 +25,9 @@ class Obstacle extends GameObject {
     }
 
     update() {
+        if (!this.active) return;
         super.update();
-        this.transform.update(this.transform.position.x - 180*Settings.get("deltaTime"))
+        this.transform.update(this.transform.position.x - Settings.get("gameSpeed")*Settings.get("deltaTime"))
         if (this.transform.position.x < -this.transform.size.width) {
             ObstaclePoolManager.release(this);
         }

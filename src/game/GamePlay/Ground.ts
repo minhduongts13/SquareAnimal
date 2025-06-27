@@ -11,26 +11,22 @@ import { IMAGES } from "../constant/images";
 
 class Ground extends GameObject {
     private x2 : number;
-    private x1 : number;
-    private speed: number;      
+    private x1 : number;    
     private img: HTMLImageElement;
 
 
     constructor(){
         super(new Transform(0, Settings.get("gameHeight") - 192, Settings.get("gameWidth"), 192));
         this.img    = ResourceManager.getImage(IMAGES.GAME_GROUND.KEY);
-        // let collider = new BoxCollider(this.transform);
-        // this.addComponent(collider);
 
         this.x1 = 0;
         this.x2 = Settings.get("gameWidth");
-        this.speed = 180;
         this.tag = "ground";
     }
 
     update() {
-        this.x1 -= this.speed * Settings.get("deltaTime");
-        this.x2 -= this.speed * Settings.get("deltaTime");
+        this.x1 -= Settings.get("gameSpeed") * Settings.get("deltaTime");
+        this.x2 -= Settings.get("gameSpeed") * Settings.get("deltaTime");
         const w = Settings.get("gameWidth");
         if (this.x1 + w <= 0) this.x1 = this.x2 + w;
         if (this.x2 + w <= 0) this.x2 = this.x1 + w;

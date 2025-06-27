@@ -20,8 +20,10 @@ class PhysicsHandler {
     private collectCollider(gameObjects : GameObject[]){
         let colliders: { go: GameObject; col: Collider }[] = [];
         for (const go of gameObjects) {
-            for (let comp of go.getAllComponents()){
-                if (comp instanceof Collider) colliders.push({ go, col : comp });
+            if (!(go instanceof Obstacle) || (go as Obstacle).active){
+                for (let comp of go.getAllComponents()){
+                    if (comp instanceof Collider) colliders.push({ go, col : comp });
+                }
             }
             
             const children = go.getChildren as GameObject[]; 
@@ -46,8 +48,8 @@ class PhysicsHandler {
         }
 
         let colliders: { go: GameObject; col: Collider }[] = this.collectCollider(this.gameObjects);
-        // colliders = colliders.filter(go => !(go instanceof Obstacle) || (go as Obstacle).active);
-        // console.log(colliders);
+        // colliders = colliders.filter(item => !(item.go instanceof Obstacle)  || (item.go as Obstacle).active);
+        console.log(colliders);
         for (let i = 0; i < colliders.length; i++) {
             for (let j = i + 1; j < colliders.length; j++) {
                 const A = colliders[i];
@@ -62,20 +64,22 @@ class PhysicsHandler {
                     if (A.col.getTag == SceneKeys.BOX.HEAD || B.col.getTag == SceneKeys.BOX.HEAD) continue;
                     if (A.col.transform.position.x > -10) this.landOnPlatform(B.go, A.go)
                 } else if (A.go instanceof Player && B.go instanceof Obstacle){
-                    if (A.col.getTag == SceneKeys.PLAYER.HEAD){
+                    if (B.col.getTag == SceneKeys.OBSTACLE.SPIKE_TAG || A.col.getTag == SceneKeys.PLAYER.HEAD){
                         SceneManager.switchScene("gameover");
                     }
                     else this.landOnObstacle(A.go, B.go);
                 } else if (A.go instanceof Obstacle && B.go instanceof Player){
-                    if (A.col.getTag == SceneKeys.PLAYER.HEAD){
+                    if (A.col.getTag == SceneKeys.OBSTACLE.SPIKE_TAG || A.col.getTag == SceneKeys.PLAYER.HEAD){
                         SceneManager.switchScene("gameover");
                     }
                     else this.landOnObstacle(B.go, A.go);
                 } else if (A.go instanceof Square && B.go instanceof Obstacle){
                     if (A.col.getTag == SceneKeys.BOX.HEAD) this.stopSquareObstacle(A.go, B.go);
+                    else if (B.col.getTag == SceneKeys.OBSTACLE.SPIKE_TAG) this.destroySquareObstacle(A.go, B.go); 
                     else this.goSquareObstacle(A.go, B.go);
                 } else if (A.go instanceof Obstacle && B.go instanceof Square){
                     if (B.col.getTag == SceneKeys.BOX.HEAD) this.stopSquareObstacle(B.go, A.go);
+                    else if (A.col.getTag == SceneKeys.OBSTACLE.SPIKE_TAG) this.destroySquareObstacle(B.go, A.go); 
                     else this.goSquareObstacle(B.go, A.go);
                 }
                 
@@ -99,16 +103,31 @@ class PhysicsHandler {
     }
 
     private stopSquareObstacle(A : Square, B : Obstacle){
-        A.getTransform.update(A.getTransform.position.x - 180*Settings.get("deltaTime"));
+        A.getTransform.update(A.getTransform.position.x - Settings.get("gameSpeed")*Settings.get("deltaTime"));
         let player = undefined;
         for (let go of this.gameObjects){
             if (go instanceof Player){
                 player = go;
-                console.log(player);
                 break;
             }
         }
-        if (A.getTransform.position.x < - 32) player?.releaseSquare(A.getId());
+        if (A.getTransform.position.x < - 50){
+            player?.releaseSquare(A.getId());
+            Settings.add("score", Settings.get("score") + 1);
+        } 
+    }
+
+    private destroySquareObstacle(A : Square, B : Obstacle){
+        let player = undefined;
+        for (let go of this.gameObjects){
+            if (go instanceof Player){
+                player = go;
+                break;
+            }
+        }
+        
+        player?.releaseSquare(A.getId());
+        Settings.add("score", Settings.get("score") + 1);
     }
 
     private goSquareObstacle(A : Square, B : Obstacle){

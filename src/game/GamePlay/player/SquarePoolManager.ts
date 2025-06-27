@@ -8,7 +8,7 @@ class SquarePoolManager {
     private static pool: Square[] = [];
     static create(){
         this.pool = [];
-        for (let i = 0; i < 14; i++){
+        for (let i = 0; i < 18; i++){
             this.pool.push(new Square(i));
         }
     }

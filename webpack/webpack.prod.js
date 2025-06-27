@@ -7,6 +7,13 @@ const { InjectManifest } = require('workbox-webpack-plugin')
 const prod = {
   mode: 'production',
   stats: 'errors-warnings',
+
+  performance: {
+    hints: 'warning',                
+    maxAssetSize: 5 * 1024 * 1024,   // 5 MB
+    maxEntrypointSize: 5 * 1024 * 1024
+  },
+
   output: {
     filename: '[name].[contenthash].bundle.js',
     chunkFilename: '[name].[contenthash].chunk.js'
@@ -32,7 +39,8 @@ const prod = {
     // ),
     new InjectManifest({
       swSrc: path.resolve(__dirname, '../pwa/sw.js'),
-      swDest: 'sw.js'
+      swDest: 'sw.js',
+      maximumFileSizeToCacheInBytes: 15 * 1024 * 1024
     })
   ]
 }

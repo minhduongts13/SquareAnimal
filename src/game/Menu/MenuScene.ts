@@ -53,6 +53,8 @@ class MenuScene extends Scene {
         return new Promise<void>(resolve => setTimeout(resolve, ms));
     }
 
-    
+    reset(): void {
+        SoundManager.playOnLoop(SOUNDS.MENU.MUSIC.KEY, 0.5);
+    }
 }
 export default MenuScene;

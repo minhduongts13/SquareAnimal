@@ -5,9 +5,11 @@ import RigidBody from "../../../core/component/RigidBody";
 import Transform from "../../../core/component/Transform";
 import GameObject from "../../../core/gameobject/GameObject";
 import SceneManager from "../../../core/manager/SceneManager";
+import SoundManager from "../../../core/manager/SoundManager";
 import SpriteRenderer from "../../../core/renderer/SpriteRenderer";
 import { IMAGES } from "../../constant/images";
 import { SceneKeys } from "../../constant/SceneKeys";
+import { SOUNDS } from "../../constant/sounds";
 import Square from "./Square";
 import SquarePoolManager from "./SquarePoolManager";
 
@@ -33,12 +35,13 @@ class Player extends GameObject {
     }
 
     public placePlatform(): void {
+        if (this.transform.position.y < 32) return;
+        SoundManager.play(SOUNDS.GAMEPLAY.BOX.KEY, 0.5);
         const x = this.transform.position.x;
         const y = this.transform.position.y + this.transform.size.height;
         let square = SquarePoolManager.get();
         square.work(x, y);
         this.children.push(square);
-        if (this.transform.position.y < 32) SceneManager.switchScene("gameover")
     }
 
     public releaseSquare(id : number): void{

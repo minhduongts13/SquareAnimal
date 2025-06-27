@@ -98,21 +98,45 @@ export const IMAGES = {
         WIDTH: 32,
         HEIGHT: 448
     },
+    OBSTACLE_5: {
+        KEY: "Obstacle_5",
+        PATH: "https://minhduongts13.github.io/SquareAnimal/assets/images/obstacle/ob5.png",
+        WIDTH: 448,
+        HEIGHT: 448
+    },
+    OBSTACLE_6: {
+        KEY: "Obstacle_6",
+        PATH: "https://minhduongts13.github.io/SquareAnimal/assets/images/obstacle/ob6.png",
+        WIDTH: 448,
+        HEIGHT: 448
+    },
+    OBSTACLE_7: {
+        KEY: "Obstacle_7",
+        PATH: "https://minhduongts13.github.io/SquareAnimal/assets/images/obstacle/ob7.png",
+        WIDTH: 448,
+        HEIGHT: 448
+    },
+    OBSTACLE_8: {
+        KEY: "Obstacle_8",
+        PATH: "https://minhduongts13.github.io/SquareAnimal/assets/images/obstacle/ob8.png",
+        WIDTH: 448,
+        HEIGHT: 448
+    },
     SQUARE: {
         KEY: "SQUARE",
         PATH: "https://minhduongts13.github.io/SquareAnimal/assets/images/square.png"
     },
     LOADING_BG: {
         KEY: "Loading_BG",
-        PATH: "../assets/images/loading-background.jpg"
+        PATH: "https://minhduongts13.github.io/SquareAnimal/assets/images/loading-background.jpg"
     },
     LOADING_ICON: {
         KEY: "Loading_Icon",
-        PATH: "../assets/images/loading.png"
+        PATH: "https://minhduongts13.github.io/SquareAnimal/assets/images/loading.png"
     },
     LOADING_TEXT: {
         KEY: "Loading_Text",
-        PATH: "../assets/images/loading-text.png"
+        PATH: "https://minhduongts13.github.io/SquareAnimal/assets/images/loading-text.png"
     },
 }
 

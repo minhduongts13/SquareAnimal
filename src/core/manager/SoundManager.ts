@@ -8,8 +8,7 @@ class SoundManager {
     }
     
     static async play(key : string, volume: number = 1.0){
-        const audio = await ResourceManager.getAudio(key);
-        audio.src = key;
+        const audio = ResourceManager.getAudio(key);
         audio.loop = false;
         audio.volume = volume;
         audio.currentTime = 0;
@@ -25,11 +24,15 @@ class SoundManager {
     }
 
     static async stopAll(){
-
+        for (const audio of SoundManager.playingAudios.values()) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+        SoundManager.playingAudios.clear();
     }
 
     static async playOnLoop(key: string, volume: number = 1.0){
-        const audio = await ResourceManager.getAudio(key);
+        const audio = ResourceManager.getAudio(key);
         audio.loop = true;
         audio.volume = volume;
         audio.currentTime = 0;

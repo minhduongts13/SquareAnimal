@@ -10,7 +10,7 @@ class InputHandler {
         window.addEventListener("keyup",    InputHandler.onKeyUp);
 
         // Mouse 
-        canvas.addEventListener("mousemove", InputHandler.onMouseMove);
+        // canvas.addEventListener("mousemove", InputHandler.onMouseMove);
         canvas.addEventListener("mousedown", InputHandler.onMouseDown);
         canvas.addEventListener("mouseup",   InputHandler.onMouseUp);
 

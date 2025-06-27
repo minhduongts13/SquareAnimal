@@ -48,19 +48,16 @@ class Renderer {
     }
 
     static setScreenSize(){
-        const w = Settings.get("gameWidth");   // e.g. 448
-        const h = Settings.get("gameHeight");  // e.g. 640
+        const w = Settings.get("gameWidth");   // 448
+        const h = Settings.get("gameHeight");  // 640
         this.canvas.width  = w;
         this.canvas.height = h;
 
-        // 2) Display size:
         const vw = window.innerWidth;
         const vh = window.innerHeight;
 
-        // Tính tỷ lệ sao cho vừa khít, giữ aspect ratio
         const scale = Math.min(vw / w, vh / h);
 
-        // Gán CSS để canvas hiển thị to lên:
         this.canvas.style.width  = `${w * scale}px`;
         this.canvas.style.height = `${h * scale}px`;
     }
